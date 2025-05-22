@@ -1,16 +1,14 @@
 import { createClient } from '@supabase/supabase-js';
-import { SUPABASE_URL, SUPABASE_ANON } from "~/lib/load_keys.py"; // Simulate loading from Python file
 
-// In a real app, use process.env.VITE_SUPABASE_URL and process.env.VITE_SUPABASE_ANON_KEY
-const supabaseUrl = SUPABASE_URL; // Replace with process.env.VITE_SUPABASE_URL in a real deployment
-const supabaseAnonKey = SUPABASE_ANON; // Replace with process.env.VITE_SUPABASE_ANON_KEY in a real deployment
+const supabaseUrl = process.env.VITE_SUPABASE_URL;
+const supabaseAnonKey = process.env.VITE_SUPABASE_ANON_KEY;
 
 if (!supabaseUrl || !supabaseAnonKey) {
-  console.error('Supabase URL or Anon Key is not set.');
+  console.error('Supabase URL or Anon Key is not set in environment variables');
   // In a real app, you might throw an error or handle this more gracefully
 }
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+export const supabase = createClient(supabaseUrl!, supabaseAnonKey!);
 
 // Helper function to execute Supabase queries based on user intent
 export async function executeSupabaseQuery(query: string) {

@@ -1,8 +1,12 @@
-import { NEWSAPI_KEY } from "~/lib/load_keys.py"; // Simulate loading from Python file
+import { createClient } from '@supabase/supabase-js';
 
 export async function fetchLatestNews(q: string) {
-  // In a real app, use process.env.NEWSAPI_KEY
-  const apiKey = NEWSAPI_KEY; // Replace with process.env.NEWSAPI_KEY in a real deployment
+  const apiKey = process.env.NEWSAPI_KEY;
+
+  if (!apiKey) {
+    console.error('News API Key is not set in environment variables');
+    return null;
+  }
 
   const url = `https://newsapi.org/v2/everything?` +
               `q=${encodeURIComponent(q)}&language=es&sortBy=publishedAt&pageSize=1&apiKey=${apiKey}`;
