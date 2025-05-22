@@ -15,9 +15,6 @@ export default defineConfig({
   ],
   server: {
     port: 3000,
-    hmr: {
-      protocol: 'ws',
-      host: 'localhost',
-    },
+    hmr: true // Simplified HMR configuration
   },
 });
